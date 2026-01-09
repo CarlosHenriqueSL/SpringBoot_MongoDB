@@ -1,24 +1,30 @@
 package com.course.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "user")
-public class User implements Serializable {
+@Document
+public class Post implements Serializable {
 
     @Id
     private String id;
-    
-    private String name;
-    private String email;
 
-    public User() {}
-    public User(String id, String name, String email) {
+    private LocalDate date;
+    private String title;
+    private String body;
+    private User author;
+
+    public Post() {}
+
+    public Post(String id, LocalDate date, String title, String body, User author) {
         this.id = id;
-        this.name = name;
-        this.email = email;
+        this.date = date;
+        this.title = title;
+        this.body = body;
+        this.author = author;
     }
 
     public String getId() {
@@ -29,20 +35,36 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTitle() {
+        return title;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     @Override
@@ -61,12 +83,12 @@ public class User implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        User other = (User) obj;
+        Post other = (Post) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }
+    } 
 }
