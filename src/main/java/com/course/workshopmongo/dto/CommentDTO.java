@@ -1,16 +1,16 @@
 package com.course.workshopmongo.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class CommentDTO implements Serializable {
 
     private String text;
-    private LocalDate date;
+    private Date date;
     private AuthorDTO author;
 
     public CommentDTO() {}
-    public CommentDTO(String text, LocalDate date, AuthorDTO author) {
+    public CommentDTO(String text, Date date, AuthorDTO author) {
         this.text = text;
         this.date = date;
         this.author = author;
@@ -24,11 +24,11 @@ public class CommentDTO implements Serializable {
         this.text = text;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

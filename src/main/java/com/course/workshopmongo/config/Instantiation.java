@@ -1,8 +1,8 @@
 package com.course.workshopmongo.config;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,7 +27,8 @@ public class Instantiation implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         userRepository.deleteAll();
         postRepository.deleteAll();
@@ -38,12 +39,12 @@ public class Instantiation implements CommandLineRunner{
         
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
-        Post post1 = new Post(null, LocalDate.parse("21/03/2018", formatter), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
-        Post post2 = new Post(null, LocalDate.parse("23/03/2018", formatter), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+        Post post1 = new Post(null, formatter.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+		Post post2 = new Post(null, formatter.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
 
-        CommentDTO comment1 = new CommentDTO("Boa viagem mano!", LocalDate.parse("21/03/2018", formatter), new AuthorDTO(alex));
-        CommentDTO comment2 = new CommentDTO("Aproveite", LocalDate.parse("22/03/2018", formatter), new AuthorDTO(bob));
-        CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", LocalDate.parse("23/03/2018", formatter), new AuthorDTO(alex));
+		CommentDTO comment1 = new CommentDTO("Boa viagem mano!", formatter.parse("21/03/2018"), new AuthorDTO(alex));
+		CommentDTO comment2 = new CommentDTO("Aproveite", formatter.parse("22/03/2018"), new AuthorDTO(bob));
+		CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", formatter.parse("23/03/2018"), new AuthorDTO(alex));
         
         post1.getComments().addAll(Arrays.asList(comment1, comment2));
         post2.getComments().addAll(Arrays.asList(comment3));

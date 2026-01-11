@@ -1,8 +1,8 @@
 package com.course.workshopmongo.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -17,7 +17,7 @@ public class Post implements Serializable {
     @Id
     private String id;
 
-    private LocalDate date;
+    private Date date;
     private String title;
     private String body;
     private AuthorDTO author;
@@ -26,7 +26,7 @@ public class Post implements Serializable {
 
     public Post() {}
 
-    public Post(String id, LocalDate date, String title, String body, AuthorDTO author) {
+    public Post(String id, Date date, String title, String body, AuthorDTO author) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -42,11 +42,11 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
